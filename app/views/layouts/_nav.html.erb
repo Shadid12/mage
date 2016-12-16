@@ -1,8 +1,10 @@
 <h3>Navbar</h3>
 <% if user_signed_in? %>
     <div>
+        <%= image_tag current_user.image.thumb %> ||
         Welcome <%= current_user.name %> ||
-        <%= link_to "Log out",  destroy_user_session_path, method: 'delete' %>
+        <%= link_to "Log out",  destroy_user_session_path, method: 'delete' %> ||
+        <%= link_to "Edit Profile",  edit_user_registration_path %> ||
     </div>
 <% else %>
     <%= link_to "Sign up", new_user_registration_path %> || 
