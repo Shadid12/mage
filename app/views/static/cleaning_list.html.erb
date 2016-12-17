@@ -1,0 +1,18 @@
+<h1> Listings near you to get started </h1>
+
+<% if user_signed_in? %>
+
+    <%= form_tag cleaning_list_path, :method => :get do %>
+      <p>
+        <%= text_field_tag :radius, params[:radius] %>
+        <%= submit_tag "Search Near", :name => nil %>
+      </p>
+    <% end %>
+
+<% end %>
+
+<ul>
+<% for location in @near %>
+  <li><%= location.address %></li>
+<% end %>
+</ul>

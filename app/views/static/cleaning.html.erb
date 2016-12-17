@@ -1,0 +1,28 @@
+<h1> This is where we clean </h1>
+
+<% if user_signed_in? %>
+    <p>We would like to get you current location</p>
+    <button onclick="getLocation()">Accept</button>
+    <p id="demo"></p>
+<% end %>
+
+
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+    // x.innerHTML = "Latitude: " + position.coords.latitude + 
+    // "<br>Longitude: " + position.coords.longitude;
+    $.post("/update_user_location?latitude=" + position.coords.latitude 
+    + "&longitude=" + position.coords.longitude)
+}
+</script>
