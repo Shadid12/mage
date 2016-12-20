@@ -9,6 +9,8 @@
     <textarea id="message" placeholder="Message......."></textarea><br/>
     <br/>
     <input type="hidden" id="listing_id" value="<%= @listing.id %>">
+    <input type="hidden" id="host_id" value="<%= @listing.user_id %>">
+    <input type="hidden" id="cleaner_id" value="<%= current_user.id %>">
     <input type="button" id="send" value="Send"/>
     <input type="button" id="cancel" value="Cancel"/>
     <br/>
@@ -29,10 +31,15 @@ $(document).ready(function() {
     $("#send").click(function() {
         var message = $("#message").val();
         var listing_id = $("#listing_id").val();
+        var host_id = $("#host_id").val();
+        var cleaner_id = $("#cleaner_id").val();
+        
         d = {
-            'message': message, 
             'listing_id': listing_id,
-            'status': "pending"
+            'status': "pending",
+            'body': message,
+            'host_id': host_id,
+            'cleaner_id' :cleaner_id
         };
         
         $.ajax({

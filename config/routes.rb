@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post '/update_user_location', to: 'static#update_user_location'
   get '/cleaning_list', to: 'static#cleaning_list'
   resources :crecits, only: [:index, :new, :create, :show]
+  resources :messages, only: [:create]
 end

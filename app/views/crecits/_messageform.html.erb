@@ -1,0 +1,30 @@
+<div id="container"></div>
+<div>
+    <form class="form" action="#" id="contact">
+        <textarea id="message" placeholder="Message......."></textarea><br>
+        <input type="hidden" id="_id" value="<%= @crecit.id %>">
+        <input type="hidden" id="user_id" value="<%= current_user.id %>">
+        <input type="button" id="send" value="Send"/>
+    </form>    
+</div>
+<script type="text/javascript">
+    $("#send").click(function() {
+        var message = $("#message").val();
+        var crecit_id = $("#_id").val();
+        var user_id = $("#user_id").val();
+        
+        d = {
+            'body': message,
+            'crecit_id': crecit_id,
+            'user_id' :user_id
+        };
+        
+        $.ajax({
+           type: "POST",
+           url: "/messages",
+           data: d
+        });
+        $("#container").append('<div><b> <%= current_user.name %> :</b>'+message+'</div>')
+        $('#message').val('');
+    });
+</script>

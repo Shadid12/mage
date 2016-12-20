@@ -1,0 +1,38 @@
+<h1><%= current_user.name %>'s Inbox</h1>
+
+<% if !@c.empty? %>
+    <h3>Your conversation's with hosts</h3>
+    <% @c.each do |c| %>
+        <% host = User.find(c.host_id) %>
+        <div>
+            Your Request sent to <%= host.name %> is <%= c.status %>
+            </br>
+            <% if c.messages.last.user_id == current_user.id %>
+                <small><%= link_to "Conversation", crecit_path(c) %></small>
+            <% else %>
+                <b><span><%= link_to "Conversation", crecit_path(c) %></span></b>
+            <% end %>
+            <hr></hr>
+        </div>
+    <% end %>
+<% end %>
+
+<% if !@h.empty? %>
+    <h3> your conversation with the cleaners </h3>
+    <% @h.each do |h| %>
+        <% cleaner = User.find(h.cleaner_id) %>
+        <div>
+            Your Conversation with <%= cleaner.name %>
+            <% if h.status == "pending" %>
+                Approve Request
+            <% end %>
+            </br>
+            <% if h.messages.last.user_id == current_user.id %>
+                <small><%= link_to "Conversation", crecit_path(h) %></small>
+            <% else %>
+                <b><span><%= link_to "Conversation", crecit_path(h) %></span></b>
+            <% end %>
+            <hr></hr>
+        </div>
+    <% end %>
+<% end %>

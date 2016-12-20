@@ -10,16 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217175812) do
+ActiveRecord::Schema.define(version: 20161220051841) do
 
   create_table "crecits", force: :cascade do |t|
     t.integer  "listing_id"
     t.string   "status"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text     "message"
-    t.index ["user_id"], name: "index_crecits_on_user_id"
+    t.integer  "cleaner_id"
+    t.integer  "host_id"
   end
 
   create_table "listings", force: :cascade do |t|
@@ -31,6 +30,14 @@ ActiveRecord::Schema.define(version: 20161217175812) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_listings_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text    "body"
+    t.integer "crecit_id"
+    t.integer "user_id"
+    t.index ["crecit_id"], name: "index_messages_on_crecit_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
