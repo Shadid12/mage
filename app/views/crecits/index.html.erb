@@ -24,7 +24,12 @@
         <div>
             Your Conversation with <%= cleaner.name %>
             <% if h.status == "pending" %>
-                Approve Request
+                <%= link_to "Approve Cleaner", 
+                {:controller => "crecits", :action => "approve", 
+                :cleaner_id => h.cleaner_id, :host_id => h.host_id, :listing_id => h.listing_id }, 
+                :method => "post" %>
+            <% else %>
+                <span><b>APPROVED</b></span>
             <% end %>
             </br>
             <% if h.messages.last.user_id == current_user.id %>

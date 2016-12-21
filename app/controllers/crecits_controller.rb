@@ -6,7 +6,8 @@ class CrecitsController < ApplicationController
     end
     
     def create
-        k = Crecit.find_by(params[:host_id], params[:cleaner_id], params[:listing_id])
+        k = Crecit.find_by(search_params)
+        puts k
         if k.nil?
             @crecit = Crecit.create(crecit_params)
             if @crecit.save
@@ -42,6 +43,15 @@ class CrecitsController < ApplicationController
         @c = Crecit.where(cleaner_id: current_user.id)
     end
     
+    def approve
+        @crecit = Crecit.find_by(search_params)
+        if @crecit.host_id == current_user.id
+            @crecit.status = "approved"
+            @crecit.save
+            redirect_to crecits_path
+        end
+    end
+    
     private 
     
     def crecit_params
@@ -50,6 +60,10 @@ class CrecitsController < ApplicationController
     
     def message_params
         params.permit(:body)
+    end
+    
+    def search_params
+        params.permit(:cleaner_id, :host_id, :listing_id)
     end
     
 end

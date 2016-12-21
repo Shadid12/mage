@@ -7,4 +7,7 @@ Rails.application.routes.draw do
   get '/cleaning_list', to: 'static#cleaning_list'
   resources :crecits, only: [:index, :new, :create, :show]
   resources :messages, only: [:create]
+  
+  post '/approve', to: 'crecits#approve'
+  
 end
