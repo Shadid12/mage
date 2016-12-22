@@ -1,15 +1,41 @@
-<h3>Navbar || <%= link_to "Listings", listings_path %></h3>
-<% if user_signed_in? %>
-    <div>
-        <%= image_tag current_user.image.thumb %> ||
-        Welcome <%= current_user.name %> ||
-        <%= link_to "Log out",  destroy_user_session_path, method: 'delete' %> ||
-        <%= link_to "Edit Profile",  edit_user_registration_path %> ||
-        <%= link_to "Post Listing",  new_listing_path %> ||
-        <%= link_to "Offering Cleaning Service ?",  cleaning_path %> ||
-        <%= link_to "Inbox",  crecits_path %> ||
-    </div>
-<% else %>
-    <%= link_to "Sign up", new_user_registration_path %> || 
-    <%= link_to "Log in", new_user_session_path %>
-<% end %>
+<nav class="navbar navbar-primary" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+    		</button>
+			<a class="navbar-brand" href="/">Tirak</a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="/listings">Listings</a></li>
+			<% if user_signed_in? %>
+			    <li><%= link_to "Edit Profile",  edit_user_registration_path %></li>
+			    <li><%= link_to "Post Listing",  new_listing_path %></li>
+			    <li><%= link_to "Offering Cleaning Service ?",  cleaning_path %> </li>
+			    <li><%= link_to "Inbox",  crecits_path %></li>
+			    <li><a>Welcome <%= current_user.name %></a></li>
+			    <li><a><%= image_tag current_user.image.thumb, class:"img-circle" %></a></li>
+			    <li><%= link_to "Log out",  destroy_user_session_path, method: 'delete' %></li>
+			<% else %>
+				<li><%= link_to "Sign up", new_user_registration_path %></li>
+				<li><%= link_to "Log in", new_user_session_path %></li>
+			<% end %>
+			</ul>
+		</div>
+		
+		
+	</div>
+</nav>
+
+<style>
+	.img-circle {
+    border-radius: 50%;
+    height: 25px;
+    width: 30px;
+    
+}
+</style>

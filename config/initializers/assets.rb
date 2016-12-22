@@ -9,3 +9,7 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( material-kit.css )
+Rails.application.config.assets.precompile += %w( material-kit.js )
+Rails.application.config.assets.precompile += %w( material.min.js )
+Rails.application.config.assets.precompile += %w( nouislider.min.js )
